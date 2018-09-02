@@ -39,7 +39,7 @@ export class view extends cc.Component{
     }
 
     update(dt){
-        //this.RotateCWDegree(dt*100,new Vector2(50,0));
+        this.RotateCWDegree(dt*100,new Vector2(0,0));
     }
 
 }
