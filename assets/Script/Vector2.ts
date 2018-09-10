@@ -17,13 +17,33 @@ export class Vector2{
         return this;
     }
 
-
-    Mag():number{
-        return Math.sqrt(this.xPos*this.xPos + this.yPos*this.yPos); 
+    Mag(pivot:Vector2 = new Vector2(0,0)):number{
+        let xDiffer = this.xPos-pivot.xPos;
+        let yDiffer = this.yPos-pivot.yPos;
+        return Math.sqrt(xDiffer*xDiffer + yDiffer*yDiffer); 
     }
 
-    GetPolar(){
-        let polar = new Polar(this.Mag(),Math.atan(this.yPos/this.xPos));
+    Normalize(){
+        return new Vector2(this.xPos/this.Mag(),this.yPos/this.Mag());
+    }
+
+    GetPolar(pivot:Vector2 = new Vector2(0,0)){
+        let xDiffer =this.xPos - pivot.xPos;
+        let yDiffer =this.yPos - pivot.yPos;
+        let radious = Math.atan(yDiffer/xDiffer);
+        if(0<xDiffer && 0<yDiffer){
+        }
+        else if(0>xDiffer && 0<yDiffer){
+            radious += Math.PI;
+        }
+        else if(0>xDiffer && 0>yDiffer){
+            radious += Math.PI;
+        }
+        else{
+            radious +=Math.PI*2;
+        }
+
+        let polar = new Polar(this.Mag(pivot),radious,pivot);
         return polar;
     }
 

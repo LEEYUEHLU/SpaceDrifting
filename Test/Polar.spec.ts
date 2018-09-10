@@ -37,11 +37,17 @@ describe('Polar',()=>{
             polar.RotateCW(30);
             assert.approximately(polar.GetDegree(),30,0.01);
         })
-
-
     })
 
+    describe('SetPivot',()=>{
+        it('pivot point(3,0) Polar(2,1/3PI) rotateCW 60 and getVecot should return vecot(5,0),',()=>{
+            let polar = new Polar(2,1/3*Math.PI);
+            polar.SetPivot(new Vector2(3,0));
+            polar.RotateCW(60);
+            assert.approximately(polar.GetVector().xPos,5,0.01);
+        });
 
+    })
 
 });
 

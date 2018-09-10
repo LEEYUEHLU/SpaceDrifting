@@ -15,10 +15,13 @@ export default class CameraControl extends cc.Component {
 
     camera_:cc.Camera;
     obstacles_:cc.Node[];
-
+    followDistance_:number;
 
     onLoad(){
        this.Harvest();
+    }
+
+    update(){
     }
 
     Harvest(){
@@ -32,10 +35,6 @@ export default class CameraControl extends cc.Component {
         for (let index = 0; index < this.obstacles_.length; index++) {
             this.camera_.addTarget(this.obstacles_[index]);
         }
-    }
-
-    start () {
-        
     }
 
 }

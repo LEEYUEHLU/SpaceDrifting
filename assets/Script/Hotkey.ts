@@ -3,7 +3,7 @@ import { Dictionary } from "./GameFrameWork/Dictionary";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class Hotkey extends cc.Component {
 
     events_:Dictionary<cc.KEY,()=>void>
 
@@ -30,7 +30,7 @@ export default class NewClass extends cc.Component {
             this.events_.GetValueOfKey(event.keyCode)();  
             return ;
         } 
-        throw new Error('there are no call back specified!');
+        throw new Error('there are no call back specified!'+event.keyCode);
     }
 
 }

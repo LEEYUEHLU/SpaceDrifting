@@ -7,6 +7,11 @@ function ArePolarEqual(a:Polar,b:Polar){
     assert.approximately(a.radious_,b.radious_,0.01);
 }
 
+function AreVecotEqual(a:Vector2,b:Vector2){
+    assert.approximately(a.xPos,b.xPos,0.01);
+    assert.approximately(a.yPos,b.yPos,0.01);
+}
+
 describe('Vector2',()=>{
 
     describe('Sub',()=>{
@@ -25,6 +30,16 @@ describe('Vector2',()=>{
         it('vector1,Sqr3 GetPolar should return Polar2,1/3PI',()=>{
             let vector1Sqr3 = new Vector2(1,Math.sqrt(3))
             ArePolarEqual(vector1Sqr3.GetPolar(),new Polar(2,Math.atan(Math.sqrt(3))));
+        })
+
+        it('vector(1,Sqr3) GetPolar with pivot(2,0) should return Polar2,2/3PI',()=>{
+            let vector1Sqr3 = new Vector2(1,Math.sqrt(3))
+            ArePolarEqual(vector1Sqr3.GetPolar(new Vector2(2,0)) , new Polar(2,2/3*Math.PI));
+        })
+
+        it('vector(1,Sqr3) GetPolar with pivot(2,0) getpivot should return (2,0))',()=>{
+            let vector1Sqr3 = new Vector2(1,Math.sqrt(3))
+            AreVecotEqual(vector1Sqr3.GetPolar(new Vector2(2,0)).GetPivot() , new Vector2(2,0));
         })
 
     })
