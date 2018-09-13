@@ -5,8 +5,7 @@ import { MathV } from "./Script/MathV";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class MovingEngine extends cc.Component {
-    
+export default class Drifter extends cc.Component {
 
     accDown: boolean = false;
     accUp: boolean = false;
@@ -14,9 +13,9 @@ export default class MovingEngine extends cc.Component {
     accel: number = 3;
     canMove_:boolean = false
     canRotate_:boolean = false;
-    posVect_:Vector2;
-    polar_:Polar;
-    directionVect_:Vector2;
+    posVect_:Vector2 = null;
+    polar_:Polar = null;
+    directionVect_:Vector2 = new Vector2(0,1);
 
     update(dt){
         if(this.canMove_){
@@ -32,7 +31,7 @@ export default class MovingEngine extends cc.Component {
         let centripetalDir = MathV.SubBy(this.polar_.GetVector(), this.polar_.GetPivot());
         let centripetalPolar =  centripetalDir.GetPolar();
         centripetalPolar.RotateCW(90);
-        this.directionVect_ = centripetalPolar.GetVector().Normalize();
+        this.SetDirection(centripetalPolar.GetVector());
         this.SetCanMove(true);
     }
 

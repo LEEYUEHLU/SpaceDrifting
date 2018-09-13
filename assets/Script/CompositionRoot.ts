@@ -1,5 +1,5 @@
 import Hotkey from "./Hotkey";
-import MovingEngine from "../MovingEngine";
+import Drifter from "../Drifter";
 import { Vector2 } from "./Vector2";
 
 const {ccclass, property} = cc._decorator;
@@ -10,8 +10,8 @@ export default class CompositionRoot extends cc.Component {
     @property(Hotkey)
     hotkey_:Hotkey = null;
 
-    @property(MovingEngine)
-    spaceShipEngine_:MovingEngine = null;
+    @property(Drifter)
+    spaceShipEngine_:Drifter = null;
 
 
     start(){

@@ -25,7 +25,7 @@ export default class CameraControl extends cc.Component {
     }
 
     Harvest(){
-        let parent = cc.find('Canvas/Obstacles');
+        let parent = cc.find('Canvas/Planets');
         this.camera_ = this.node.getComponent(cc.Camera);
         this.obstacles_ =  parent.getComponentsInChildren("Node");
         this.AddTargets();
