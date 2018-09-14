@@ -10,12 +10,19 @@ export default class Planet extends cc.Component {
     @property(Drifter)
     drifter_:Drifter = null;
     canTrap_:boolean = true;
+    distanceToDrag_:number = 200;
 
     update(){
-        // if(this.canTrap_){
-        //     this.CheckDistanceAndTrapDrifter();
-        // }
-        this.CheckDistanceAndTrapDrifter();
+        if(this.canTrap_ && this.distanceToDrag_>= this.DirectionToDrifter().Mag()){
+            this.CheckDistanceAndTrapDrifter();
+        }
+
+        let dot = Math.abs(MathV.Dot(this.drifter_.directionVect_,this.DirectionToDrifter()));
+        console.log(dot);
+
+        if(130<=this.DirectionToDrifter().Mag()){
+            this.canTrap_ = true;
+        }
     }
     
     DirectionToDrifter():Vector2{
@@ -23,14 +30,22 @@ export default class Planet extends cc.Component {
     }
 
     CheckDistanceAndTrapDrifter(){
-        let dot = MathV.Dot(this.drifter_.directionVect_,this.DirectionToDrifter());
+        let dot = Math.abs(MathV.Dot(this.drifter_.directionVect_,this.DirectionToDrifter()));
+        console.log(dot);
         if(0 <= dot && 1 >= dot ){
-            console.log('trap');
-            this.drifter_.SetPolarPivot(new Vector2(this.node.x,this.node.y));
-            this.drifter_.SetCanRotate(true);
-            this.canTrap_ = false;
+            this.Trap();
         }
     }
+
+    Trap(){
+        console.log('trap');
+        this.drifter_.SetPolarPivot(new Vector2(this.node.x,this.node.y));
+        this.drifter_.SetCanRotate(true);
+        this.canTrap_ = false;
+    }
+
+
+
 
 
 }

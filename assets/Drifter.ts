@@ -2,6 +2,7 @@ import Hotkey from "./Script/Hotkey";
 import { Vector2 } from "./Script/Vector2";
 import { Polar } from "./Script/Polar";
 import { MathV } from "./Script/MathV";
+import { RadiusDegreeConverter } from "./Script/RadiusDegreeConverter";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -16,6 +17,7 @@ export default class Drifter extends cc.Component {
     posVect_:Vector2 = null;
     polar_:Polar = null;
     directionVect_:Vector2 = new Vector2(0,1);
+    raiousDegreeConverter_:RadiusDegreeConverter = new RadiusDegreeConverter();
 
     update(dt){
         if(this.canMove_){
@@ -48,6 +50,7 @@ export default class Drifter extends cc.Component {
         this.polar_.RotateCW(dt*this.speed_);
         this.node.x = this.polar_.GetVector().xPos;
         this.node.y = this.polar_.GetVector().yPos;
+        this.node.rotation = 180-this.raiousDegreeConverter_.GetDegreeByRaius(this.polar_.radious_);
     }
 
     Move(dt){
