@@ -21,7 +21,6 @@ export default class CompositionRoot extends cc.Component {
     SetUp(){
         this.hotkey_.SetUp();
         this.hotkey_.Register(cc.KEY.enter,()=>this.StartSpaceShip());
-        this.hotkey_.Register(cc.KEY.r,()=>this.StartSpaceShipRotate());
         this.hotkey_.Register(cc.KEY.d,()=>this.Detach());
     
     }
@@ -35,11 +34,4 @@ export default class CompositionRoot extends cc.Component {
         this.spaceShipEngine_.SetCanMove(true);
         this.spaceShipEngine_.SetDirection(new Vector2(1,10));
     }
-
-    StartSpaceShipRotate(){
-        console.log('start start rotate');
-        this.spaceShipEngine_.SetPolarPivot(new Vector2(138,-14));
-        this.spaceShipEngine_.SetCanRotate(true);
-    }
- 
 }
