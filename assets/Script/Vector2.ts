@@ -27,6 +27,27 @@ export class Vector2{
         return new Vector2(this.xPos/this.Mag(),this.yPos/this.Mag());
     }
 
+    GetQuadrantOf(detectVect:Vector2) : number{
+        let differX =  detectVect.xPos - this.xPos;
+        let differY = detectVect.yPos - this.yPos;
+        if(differX == differY){
+            return 0;
+        }
+
+        if(0<differX*differY){
+            if(0< differX + differY){
+                return 1;
+            }
+            return 3;
+        }
+        else{
+            if(differX > differY){
+                return 4;
+            }
+            return 2;
+        }
+    }
+
     GetPolar(pivot:Vector2 = new Vector2(0,0)){
         let xDiffer =this.xPos - pivot.xPos;
         let yDiffer =this.yPos - pivot.yPos;

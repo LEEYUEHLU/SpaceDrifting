@@ -32,6 +32,6 @@ export default class CompositionRoot extends cc.Component {
     StartSpaceShip(){
         console.log('start move');
         this.spaceShipEngine_.SetCanMove(true);
-        this.spaceShipEngine_.SetDirection(new Vector2(1,10));
+        this.spaceShipEngine_.SetDirection(new Vector2(0,10));
     }
 }

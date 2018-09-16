@@ -40,22 +40,30 @@ export default class Planet extends cc.Component {
         return new Vector2(this.drifter_.node.x-this.node.x,this.drifter_.node.y-this.node.y);
     }
 
-    CheckDistanceAndTrapDrifter(){
-        let dot = Math.abs(MathV.Dot(this.drifter_.directionVect_,this.DirectionToDrifter()));
-        console.log(dot);
-        if(0 <= dot && 1 >= dot ){
-            this.Trap();
-        }
-    }
-
     Trap(){
         console.log('trap');
         this.drifter_.SetPolarPivot(new Vector2(this.node.x,this.node.y));
         this.canTrap_ = false;
-        if(0<=this.DirectionToDrifter().xPos){
-            this.drifter_.SetCanRotate(true,false,this.baseDistance_/this.distanceToDrag_);
-            return;
+        console.log();
+
+        //drifter is upper
+        if(0<=this.DirectionToDrifter().yPos){
+
+           //Go Back
+            if(0<this.drifter_.directionVect_.xPos){
+                this.drifter_.SetCanRotate(true,true,1);
+                }
+            else{
+                this.drifter_.SetCanRotate(true,false,1);
+            }
         }
-        this.drifter_.SetCanRotate(true,true,this.baseDistance_/this.distanceToDrag_);
+        else{
+            if(0<=this.drifter_.directionVect_.xPos){
+                this.drifter_.SetCanRotate(true,false,1);
+            }
+            else{
+                this.drifter_.SetCanRotate(true,true,1);
+            }
+        }
     }
 }
