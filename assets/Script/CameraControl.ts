@@ -22,6 +22,7 @@ export default class CameraControl extends cc.Component {
     }
 
     update(){
+        this.camera_.zoomRatio = this.node.scale;
     }
 
     Harvest(){

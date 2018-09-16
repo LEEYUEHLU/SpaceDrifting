@@ -48,5 +48,6 @@ export default class Planet extends cc.Component {
         this.canTrap_ = false;
         console.log();
         this.drifter_.SetCanRotate(true,this.isClockwise_,this.baseDistance_/this.distanceToDrag_);
+        this.drifter_.SetCamermPosition(this.node.position);
     }
 }

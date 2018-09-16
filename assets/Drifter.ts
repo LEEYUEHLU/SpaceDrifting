@@ -1,8 +1,8 @@
-import Hotkey from "./Script/Hotkey";
 import { Vector2 } from "./Script/Vector2";
 import { Polar } from "./Script/Polar";
 import { MathV } from "./Script/MathV";
 import { RadiusDegreeConverter } from "./Script/RadiusDegreeConverter";
+import CameraControl from "./Script/CameraControl";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -18,6 +18,10 @@ export default class Drifter extends cc.Component {
     directionVect_:Vector2 = new Vector2(0,1);
     raiousDegreeConverter_:RadiusDegreeConverter = new RadiusDegreeConverter();
     isClockwise_:boolean;
+    planetPosition_:cc.Vec2 = cc.v2(0,0);
+    @property(CameraControl)
+    cameraControl_:CameraControl = null;
+
 
     update(dt){
         if(this.canMove_){
@@ -30,6 +34,19 @@ export default class Drifter extends cc.Component {
                 return;
             }
             this.Rotate(-dt)
+        }
+        this.CheckOutOfBorder();
+        
+    }
+
+    CheckOutOfBorder(){
+        let maxHeight = cc.director.getVisibleSize().height/2;
+        let maxWidth = cc.director.getVisibleSize().width/2;
+        let yDistance =  Math.abs(this.node.position.y - this.planetPosition_.y);
+        let xDistance = Math.abs(this.node.position.x - this.planetPosition_.x);
+        if(maxHeight < yDistance  || maxWidth < xDistance ){
+            console.log('Game over');
+            cc.director.loadScene("Main");
         }
     }
 
@@ -96,5 +113,12 @@ export default class Drifter extends cc.Component {
         this.isClockwise_ = isClockwise;
         this.originSpeed_ = this.speed_;
         this.speed_ *= speedRatio;
+    }
+
+    SetCamermPosition(vec:cc.Vec2){
+        this.planetPosition_ = vec;
+        this.cameraControl_.node.cleanup();
+        let moveTo = cc.moveTo(1,cc.v2(vec.x,vec.y-50));
+        this.cameraControl_.node.runAction(moveTo);
     }
 }
