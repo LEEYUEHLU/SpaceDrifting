@@ -492,7 +492,8 @@
     "drifter_": {
       "__id__": 13
     },
-    "distanceToDrag_": 200
+    "distanceToDrag_": 200,
+    "isClockwise_": true
   },
   {
     "__type__": "7d4feiecqJCKbQ2BjJbVBKM",
@@ -862,7 +863,8 @@
     "drifter_": {
       "__id__": 13
     },
-    "distanceToDrag_": 100
+    "distanceToDrag_": 100,
+    "isClockwise_": false
   },
   {
     "__type__": "cc.Node",
